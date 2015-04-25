@@ -1,0 +1,25 @@
+<% provide(:title, 'Teacher') %>
+<h1>Teacher</h1>
+<p class = "name"><%= @teacher.name %></p>
+<p><%= @teacher.teacher_id %></p>
+<%= image_tag @teacher.picture.url if @teacher.picture? %>
+
+<% if user_signed_in? and current_user.admin %>
+	<%= link_to 'edit', edit_teacher_path(@teacher), class: "edit" %>
+	<%= link_to "delete", @teacher, method: :delete, class: "delete",
+                                  data: { confirm: "You sure?" } %>
+<% end %>
+
+
+<h2>vote for teacher:</h2>
+
+<%= form_for([@teacher, @teacher.votes.build]) do |f| %>
+  <% (0..10).each do |i| %>
+
+  	<%= f.radio_button :score, i %>
+  <% end %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

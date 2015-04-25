@@ -1,0 +1,8 @@
+<% provide(:title, 'Teachers') %>
+<h1>Teachers</h1>
+<% @teachers.each do |teacher| %>
+	<p><%= link_to(teacher.name, teacher, class: 'teacher') %></p>
+	<p><%= teacher.teacher_id %></p>
+	<p><%= teacher.average_score %></p>	
+	<%= link_to image_tag(teacher.picture.url), teacher %>
+<% end %>

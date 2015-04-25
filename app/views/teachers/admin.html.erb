@@ -1,0 +1,11 @@
+<% provide(:title, 'Admin') %>
+<h1>Admin</h1>
+<%= link_to 'add', new_teacher_path %>
+<% @teachers.each do |teacher| %>
+	<p><%= link_to(teacher.name, teacher, class: 'teacher') %></p>
+	<p><%= teacher.teacher_id %></p>
+	<%= link_to image_tag(teacher.picture.url), teacher %>
+	<%= link_to 'edit', edit_teacher_path(teacher), class: "edit" %>
+	<%= link_to "delete", teacher, method: :delete, class: "delete",
+                                  data: { confirm: "You sure?" } %>
+<% end %>
