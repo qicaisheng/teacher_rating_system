@@ -79,4 +79,5 @@ Rails.application.configure do
 
   config.fog_provider = 'fog' # 'fog/aws' etc. Defaults to 'fog'
   config.fog_credentials = { ... } # Provider specific credentials
+  RAILS_ENV=production bundle exec rake assets:precompile
 end
