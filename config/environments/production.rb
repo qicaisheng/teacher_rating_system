@@ -76,4 +76,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.fog_provider = 'fog' # 'fog/aws' etc. Defaults to 'fog'
+  config.fog_credentials = { ... } # Provider specific credentials
 end
