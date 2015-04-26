@@ -3,7 +3,7 @@ class VotesController < ApplicationController
 	def create
 		@teacher = Teacher.find(params[:teacher_id])
 		@vote = @teacher.votes.create(vote_params)
-		@vote.ip = request.ip
+		@vote.ip = request.remote_ip
 
 		if @vote.save
 			flash[:danger] = "vote success" 
