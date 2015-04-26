@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-	before_action :ip_detect
+	# before_action :ip_detect
 	def create
 		@teacher = Teacher.find(params[:teacher_id])
 		@vote = @teacher.votes.create(vote_params)
