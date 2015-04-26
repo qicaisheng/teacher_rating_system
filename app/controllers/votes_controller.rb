@@ -4,9 +4,10 @@ class VotesController < ApplicationController
 	def create
 		@teacher = Teacher.find(params[:teacher_id])
 		@vote = @teacher.votes.create(vote_params)
-		@vote.ip = request.remote_ip
-		ip=Socket.ip_address_list.detect{|intf| intf.ipv4_private?}
-		@vote.ip = ip.ip_address if ip
+		# @vote.ip = request.remote_ip
+		# ip=Socket.ip_address_list.detect{|intf| intf.ipv4_private?}
+		# @vote.ip = ip.ip_address if ip
+		@vote.ip = request.headers("x-forwarded-for")
 
 		if @vote.save
 			flash[:danger] = "vote success" 
