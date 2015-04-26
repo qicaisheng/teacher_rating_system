@@ -1,7 +1,7 @@
 class Teacher < ActiveRecord::Base
   has_many :votes
   mount_uploader :picture, PictureUploader
-  validates :teacher_id, presence: true
+  validates :teacher_id, presence: true,  uniqueness: true
   validates :name, presence: true
   validate :picture_presence
   validate :picture_size
