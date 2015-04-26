@@ -28,8 +28,8 @@ class VotesController < ApplicationController
 	  end
 
 	  def ip_detect
-	  	if  Vote.exists?(ip: request.ip, teacher_id: params[:teacher_id]) and evercookie_is_set?(:teachers_rating_system, 1)
-	  		# x= evercookie_is_set?(:teachers_rating_system)
+	  	if  Vote.exists?(ip: request.ip, teacher_id: params[:teacher_id]) 
+	  		# and evercookie_is_set?(:teachers_rating_system)
 	      flash[:danger] = "IP exists."    
 	      @teacher = Teacher.find(params[:teacher_id])
 	      redirect_to teacher_path(@teacher)

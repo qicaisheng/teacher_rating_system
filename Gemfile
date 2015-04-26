@@ -27,9 +27,8 @@ gem 'devise'
 # image upload and resize
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'fog'
-# evercookie
-gem 'evercookie'
+# gem 'fog'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
