@@ -1,13 +1,13 @@
 require 'socket'
 class VotesController < ApplicationController
-	# before_action :ip_detect
+	before_action :ip_detect
 	def create
 		@teacher = Teacher.find(params[:teacher_id])
 		@vote = @teacher.votes.create(vote_params)
-		# @vote.ip = request.remote_ip
+		@vote.ip = request.remote_ip
 		# ip=Socket.ip_address_list.detect{|intf| intf.ipv4_private?}
 		# @vote.ip = ip.ip_address if ip
-		@vote.ip = request.headers["x-forwarded-for"]
+		# @vote.ip = request.headers["x-forwarded-for"]
 
 		if @vote.save
 			flash[:danger] = "vote success" 
@@ -28,7 +28,8 @@ class VotesController < ApplicationController
 	  end
 
 	  def ip_detect
-	  	if  Vote.exists?(ip: request.ip, teacher_id: params[:teacher_id])
+	  	if  Vote.exists?(ip: request.ip, teacher_id: params[:teacher_id]) and evercookie_is_set?(:teachers_rating_system, 1)
+	  		# x= evercookie_is_set?(:teachers_rating_system)
 	      flash[:danger] = "IP exists."    
 	      @teacher = Teacher.find(params[:teacher_id])
 	      redirect_to teacher_path(@teacher)
