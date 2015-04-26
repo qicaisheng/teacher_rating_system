@@ -1,0 +1,65 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+footer {
+  width: 100%;
+  float: left;
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer small {
+  float: right;
+  margin: 20px;
+}
+
+
+/* body */
+
+body {
+  padding-top: 60px;
+}
+.center {
+  text-align: center;
+}
+
+/* rating */
+.rating{padding: 10px}
+.rating-star{padding: 10px}
+.rating-star .glyphicon:hover{cursor: pointer}
+.glyphicon-star-empty{color: #ccc;}
+.glyphicon-star{color: #a58600;}
+.rating-value .grey{color: #ccc;}
+.rating-value .value{color: #a58600;font-weight: bold;}
+
+/* index admin */
+.index-teacher{margin: 30px 0;}
+.index-teacher img{max-width: 200px;max-height: 250px;}
+.index-teacher label{float: left;margin: 0 10px;width: 50px;}
+.edit-delete{width: 200px;text-align: right;}
+
+/* show */
+.show-teacher{margin: 30px 0;padding:0 20px}
+.show-teacher label{float: left;margin: 0 10px;width: 50px;}
