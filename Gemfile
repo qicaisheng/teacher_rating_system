@@ -31,7 +31,8 @@ gem 'mini_magick'
 
 # bootstrap
 gem 'bootstrap-sass'
-
+gem 'less-rails'
+gem 'therubyracer'
 gem 'sprockets'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
