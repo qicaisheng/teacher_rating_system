@@ -7,7 +7,7 @@ class VotesController < ApplicationController
 		# @vote.ip = request.remote_ip
 		# ip=Socket.ip_address_list.detect{|intf| intf.ipv4_private?}
 		# @vote.ip = ip.ip_address if ip
-		@vote.ip = request.headers("x-forwarded-for")
+		@vote.ip = request.headers 
 
 		if @vote.save
 			flash[:danger] = "vote success" 
