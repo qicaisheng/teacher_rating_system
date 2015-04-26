@@ -1,24 +1,30 @@
-<% provide(:title, 'Edit teacher') %>
-<h1>Edit teacher</h1>
-<div class="row">
+<% provide(:title, '编辑教师信息') %>
+<h1>编辑教师信息</h1>
+<div class="col-md-6">
   <div class="span6 offset3">
     <%= form_for @teacher, multiple: true do |f| %>
       <%= render '/shared/error_messages', object: f.object %>
 
-      <%= f.label :name, "姓名", class: "name_label" %>
-      <%= f.text_field :name %>
+      <div class="form-group">
+        <%= f.label :name, "姓名", class: "name_label" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
 
-      <%= f.label :teacher_id, "工号" %>
-      <%= f.text_field :teacher_id %>
+      <div class="form-group">
+        <%= f.label :teacher_id, "工号" %>
+        <%= f.text_field :teacher_id, class: "form-control"  %>
+      </div>
 
-	  <%= image_tag @teacher.picture.url if @teacher.picture? %>
+      <div class="form-group">
+        <%= f.label :picture, "图片" %>
+        <%= f.file_field :picture %>
+        <p>
+          或 图片链接:
+          <%= f.text_field :remote_picture_url %>
+        </p>
 
-      <%= f.label :picture, "图片" %>
-	  <%= f.file_field :picture %>
-
-
-      <%= f.label :remote_picture_url, "图片链接" %>
-      <%= f.text_field :remote_picture_url %>
+        <%= image_tag(@teacher.picture.url, class: "img-rounded") if @teacher.picture? %>
+      </div>
 
       <%= f.submit "提交", class: "btn btn-large btn-primary" %>
     <% end %>

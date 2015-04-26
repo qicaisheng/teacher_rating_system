@@ -1,8 +1,21 @@
 <% provide(:title, 'Teachers') %>
-<h1>Teachers</h1>
+
 <% @teachers.each do |teacher| %>
-	<p><%= link_to(teacher.name, teacher, class: 'teacher') %></p>
-	<p><%= teacher.teacher_id %></p>
-	<p><%= teacher.average_score %></p>	
-	<%= link_to image_tag(teacher.picture.url), teacher %>
+	<div class="col-md-4 index-teacher" >
+		
+		<%= link_to image_tag(teacher.picture.url), teacher %>
+		<div>
+		   <label>姓名:</label>
+		   <p><%= link_to(teacher.name, teacher, class: 'teacher') %></p>
+		</div>
+		<div>
+			<label>工号:</label>
+			<p><%= teacher.teacher_id %></p>
+		</div>
+		<div>
+			<label>平均分:</label>
+			<p><%= (teacher.average_score * 100).round / 100.0 %></p>
+		</div>
+	</div>
 <% end %>
+

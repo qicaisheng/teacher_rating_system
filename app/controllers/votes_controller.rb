@@ -10,13 +10,13 @@ class VotesController < ApplicationController
 		# @vote.ip = request.headers["x-forwarded-for"]
 
 		if @vote.save
-			flash[:danger] = "vote success" 
+			flash[:danger] = "投票成功！" 
 			@teacher.vote_num += 1
 			@teacher.score_sum += @vote.score
 			@teacher.average_score = @teacher.score_sum / @teacher.vote_num
 			@teacher.save
 		else
-			flash[:danger] = "input error"
+			flash[:danger] = "输入错误!"
 		end
 
 		redirect_to teacher_path(@teacher)
@@ -30,7 +30,7 @@ class VotesController < ApplicationController
 	  def ip_detect
 	  	if  Vote.exists?(ip: request.ip, teacher_id: params[:teacher_id]) 
 	  		# and evercookie_is_set?(:teachers_rating_system)
-	      flash[:danger] = "IP exists."    
+	      flash[:danger] = "已经投过票了。"    
 	      @teacher = Teacher.find(params[:teacher_id])
 	      redirect_to teacher_path(@teacher)
 	    end

@@ -6,7 +6,7 @@ class TeachersController < ApplicationController
 	end
 
 	def index
-		@teachers = Teacher.all
+		@teachers = Teacher.order(average_score: :desc)
 	end
 
 	def new

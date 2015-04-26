@@ -1,24 +1,29 @@
-<% provide(:title, 'New teacher') %>
-<h1>New teacher</h1>
+<% provide(:title, '添加教师信息') %>
+<h1>添加教师信息</h1>
 <div class="row">
   <div class="span6 offset3">
     <%= form_for @teacher, multiple: true do |f| %>
       <%= render '/shared/error_messages', object: f.object %>
 
-      <%= f.label :name, "姓名" %>
-      <%= f.text_field :name %>
+      <div class="form-group">
+        <%= f.label :name, "姓名" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
 
-      <%= f.label :teacher_id, "工号" %>
-      <%= f.text_field :teacher_id %>
+      <div class="form-group">
+        <%= f.label :teacher_id, "工号" %>
+        <%= f.text_field :teacher_id, class: "form-control" %>
+      </div>  
 
-      <%= f.label :picture, "图片" %>
-	  <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+      <div class="form-group">
+        <%= f.label :picture, "照片" %>
+  	  <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', id: "exampleInputFile" %>
 
-	  <p>
-		<label>My Avatar URL:</label>
-		<%= image_tag(@teacher.picture_url) if @teacher.picture? %>
-		<%= f.text_field :remote_picture_url %>
-	  </p>
+    	  <p>
+    		  或 图片链接:
+    		  <%= f.text_field :remote_picture_url %>
+    	  </p>
+      </div>
 
       <%= f.submit "提交", class: "btn btn-large btn-primary" %>
     <% end %>

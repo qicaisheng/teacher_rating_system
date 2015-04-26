@@ -1,24 +1,96 @@
 <% provide(:title, 'Teacher') %>
-<h1>Teacher</h1>
-<p class = "name"><%= @teacher.name %></p>
-<p><%= @teacher.teacher_id %></p>
-<%= image_tag @teacher.picture.url if @teacher.picture? %>
 
-<% if user_signed_in? and current_user.admin %>
-	<%= link_to 'edit', edit_teacher_path(@teacher), class: "edit" %>
-	<%= link_to "delete", @teacher, method: :delete, class: "delete",
-                                  data: { confirm: "You sure?" } %>
-<% end %>
+<div class="show-teacher">
+	<%= image_tag @teacher.picture.url if @teacher.picture? %>
+	<div>
+		<label>姓名:</label>
+		<p><%= @teacher.name %></p>
+	</div>
+	<div>
+		<label>工号:</label>
+		<p><%= @teacher.teacher_id %></p>
+	</div>
+	
+	
+	<% if user_signed_in? and current_user.admin %>
+	<div class="edit-delete">
+		<%= link_to '编辑', edit_teacher_path(@teacher), class: "edit" %>
+		<%= link_to "删除", @teacher, method: :delete, class: "delete",
+	                                  data: { confirm: "You sure?" } %>
+	<% end %>
+	</div>
+
+	<div class="rating">		<span class = "rating-star">
+			<p>你的评分:</p>
+			<% (0..10).each do |i| %>
+				<span class="rate-<%= i %> glyphicon glyphicon-star-empty
+	" title="点击评<%= i %>分" >
+					<span style="display: none;"><%= i %></span>
+				</span>
+			<% end %>
+		</span>
+		<span class = "rating-value">
+			<span class="value">-</span>
+			<span class="grey">/10</span>
+		</span>
+	</div>
 
 
-<h2>vote for teacher:</h2>
+	<div style="display: none">
+	<%= form_for([@teacher, @teacher.votes.build]) do |f| %>
+	  <% (0..10).each do |i| %>
 
-<%= form_for([@teacher, @teacher.votes.build]) do |f| %>
-  <% (0..10).each do |i| %>
+	  	<%= f.radio_button :score, i, class: "score-#{i}" %>
+	  <% end %>
+	  <p>
+	     <%= f.submit "提交", class: "score-submit btn btn-large btn-primary" %>
+	  </p>
+	<% end %>
+	</div>
 
-  	<%= f.radio_button :score, i %>
-  <% end %>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+</div>
+
+<script type="text/javascript">
+	var mousedown = false;
+	var score = '-';
+	$(".glyphicon").mouseenter(function(){
+		var index = $(this).text() - '';
+		for (var i = 0; i <= index ; i++) {
+			var my_rate_class = ".rate-" + i;
+			$(my_rate_class).addClass("glyphicon-star");
+			$(my_rate_class).removeClass("glyphicon-star-empty");
+		};
+		for (var i = index+1; i <= 10 ; i++) {
+			var my_rate_class = ".rate-" + i;
+			$(my_rate_class).removeClass("glyphicon-star");
+			$(my_rate_class).addClass("glyphicon-star-empty");
+		};
+		$(".rating-value .value").text(index);
+    });
+    $(".rating-star").mouseleave(function(){
+		for (var i = 0; i <= 10 ; i++) {
+			var my_rate_class = ".rate-" + i;
+			$(my_rate_class).removeClass("glyphicon-star");
+			$(my_rate_class).addClass("glyphicon-star-empty");
+		};
+		if (!mousedown){
+			$(".rating-value .value").text('-');
+		}else{
+			for (var i = 0; i <= score ; i++) {
+				var my_rate_class = ".rate-" + i;
+				$(my_rate_class).addClass("glyphicon-star");
+				$(my_rate_class).removeClass("glyphicon-star-empty");
+			};
+			$(".rating-value .value").text(score);
+		}
+    });
+    $(".glyphicon").mousedown(function(){
+    	score = $(this).text() - '';
+    	var score_radio = ".score-" + score;
+    	$(".rating-value .value").text(score);  
+    	mousedown = true;  
+    	$(score_radio).click();
+    	$(".score-submit").click();	
+    });
+
+</script>

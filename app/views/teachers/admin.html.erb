@@ -1,11 +1,34 @@
 <% provide(:title, 'Admin') %>
-<h1>Admin</h1>
-<%= link_to 'add', new_teacher_path %>
+<h2>管理</h2>
+<button type="button" class="btn btn-default btn-lg">
+<%= link_to '添加教师信息', new_teacher_path, class: "glyphicon glyphicon-plus " %>
+</button>
 <% @teachers.each do |teacher| %>
-	<p><%= link_to(teacher.name, teacher, class: 'teacher') %></p>
-	<p><%= teacher.teacher_id %></p>
-	<%= link_to image_tag(teacher.picture.url), teacher %>
-	<%= link_to 'edit', edit_teacher_path(teacher), class: "edit" %>
-	<%= link_to "delete", teacher, method: :delete, class: "delete",
+
+	<div class="col-md-4 index-teacher" >
+		
+		<%= link_to image_tag(teacher.picture.url), teacher %>
+		<div>
+		   <label>姓名:</label>
+		   <p><%= link_to(teacher.name, teacher, class: 'teacher') %></p>
+		</div>
+		<div>
+			<label>工号:</label>
+			<p><%= teacher.teacher_id %></p>
+		</div>
+		<div>
+			<label>平均分:</label>
+			<p><%= (teacher.average_score * 100).round / 100.0 %></p>
+		</div>
+
+		<div class="edit-delete">
+			<%= link_to '编辑', edit_teacher_path(teacher), class: "edit" %>
+			<%= link_to "删除", teacher, method: :delete, class: "delete",
                                   data: { confirm: "You sure?" } %>
+		</div>
+	</div>
+
+
 <% end %>
+
+
