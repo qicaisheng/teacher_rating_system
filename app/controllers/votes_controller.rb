@@ -1,9 +1,12 @@
+require 'socket'
 class VotesController < ApplicationController
 	# before_action :ip_detect
 	def create
 		@teacher = Teacher.find(params[:teacher_id])
 		@vote = @teacher.votes.create(vote_params)
 		@vote.ip = request.remote_ip
+		ip=Socket.ip_address_list.detect{|intf| intf.ipv4_private?}
+		@vote.ip = ip.ip_address if ip
 
 		if @vote.save
 			flash[:danger] = "vote success" 
