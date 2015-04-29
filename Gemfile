@@ -29,6 +29,10 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 
+# upyun
+gem 'rest-client'
+gem 'carrierwave-upyun'
+
 # bootstrap
 gem 'bootstrap-sass'
 gem 'less-rails'

@@ -9,7 +9,10 @@ class PictureUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
 
   if Rails.env.production?
-    storage :fog
+    # storage :fog
+    storage :upyun
+    self.upyun_bucket = "teachers"
+    self.upyun_bucket_host = "http://teachers.b0.upaiyun.com"
   else
     storage :file
   end
