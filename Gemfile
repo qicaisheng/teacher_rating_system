@@ -27,7 +27,7 @@ gem 'devise'
 # image upload and resize
 gem 'carrierwave'
 gem 'mini_magick'
-# gem 'fog'
+gem 'fog'
 
 # bootstrap
 gem 'bootstrap-sass'
